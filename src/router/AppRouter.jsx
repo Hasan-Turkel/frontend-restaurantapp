@@ -10,17 +10,16 @@ import MyReservations from "../pages/MyReservations";
 const AppRouter = () => {
   return (
     <Router>
-    <Navbar />
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/restaurants" element={<Restaurants />} />
-      <Route path="/create-reservation" element={<Reservation />} />
-      <Route path="/my-reservations" element={<MyReservations />} />
-      <Route path="/login" element={<Login />} />
-    </Routes>
-    <Footer />
-  </Router>
-  )
-}
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/restaurants" element={<Restaurants />} />
+        <Route path="/create-reservation" element={<Reservation />} />
+        <Route path="/my-reservations" element={<MyReservations />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
+  );
+};
 
-export default AppRouter
+export default AppRouter;

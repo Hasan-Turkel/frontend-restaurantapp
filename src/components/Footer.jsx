@@ -2,11 +2,11 @@
 import { AiFillGithub } from 'react-icons/ai'
 import { BiLogoGmail, BiLogoLinkedin } from 'react-icons/bi'
 
-const Footer = () => {
+const Footer = ({props}) => {
   return (
     <> 
     <div className='empty-div'></div>
-    <footer className='w-100 d-flex justify-content-between p-2 px-5 align-items-center bg-black position-absolute bottom-0'>
+    <footer className={'w-100 d-flex justify-content-between p-2 px-5 align-items-center bg-black ' + props}>
 
       <div><h2 className='text-white'>Turkel's Restaurant </h2>
       <p className='text-white'>The taste in the middle of Europe</p></div>
