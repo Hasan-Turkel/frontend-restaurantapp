@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg bg-black">
+    <nav className="navbar navbar-expand-lg bg-black py-3">
     <div className="container-fluid align-items-end">
       <NavLink className="navbar-brand text-white fs-2 " to="/">
         Turkel's Restaurant
