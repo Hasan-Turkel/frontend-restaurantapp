@@ -8,6 +8,7 @@ const useAuthCalls = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { axiosSimple } = useAxios();
+  const { axiosToken } = useAxios();
 
   const login = async (values) => {
     dispatch(fetchStart());
@@ -41,7 +42,7 @@ const useAuthCalls = () => {
   const logout = async () => {
     dispatch(fetchStart());
     try {
-      await axios.post(`${BASE_URL}/users/auth/logout/`);
+        const { data } = await axiosToken.get(`auth/logout`);
       dispatch(logoutSuccess());
     //   toastSuccessNotify("Logout performed.")
       navigate("/");

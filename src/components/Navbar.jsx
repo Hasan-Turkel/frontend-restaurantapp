@@ -1,11 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import useAuthCalls from "../hooks/useAuthCalls";
 
 const Navbar = () => {
 
   const {user} = useSelector((state)=>state.auth)
+  const { logout } = useAuthCalls()
 
-  console.log(user);
+  // console.log(user);
   return (
     <nav className="navbar navbar-expand-lg bg-black py-3">
     <div className="container-fluid align-items-end">
@@ -39,7 +41,7 @@ const Navbar = () => {
                
           {!user? <NavLink className="nav-link text-white fs-4 " to="/login">
             Login
-          </NavLink> :<NavLink className="nav-link text-white fs-4 ">
+          </NavLink> :<NavLink className="nav-link text-white fs-4 " onClick={()=>logout()}>
             Logout
           </NavLink>}   
          
