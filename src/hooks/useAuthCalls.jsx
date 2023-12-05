@@ -28,13 +28,13 @@ const useAuthCalls = () => {
   const register = async (values) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axios.post(`${BASE_URL}/users/auth/register/`, values);
+        const { data } = await axiosSimple.post(`auth/register`, values);
       dispatch(registerSuccess(data));
     //   toastSuccessNotify("Register performed.")
       navigate("/");
-      // console.log(data);
+      console.log(data);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       dispatch(fetchFail());
     //   toastErrorNotify("Register failed")
     }
