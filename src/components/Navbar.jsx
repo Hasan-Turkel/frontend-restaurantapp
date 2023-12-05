@@ -1,6 +1,11 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+
+  const {user} = useSelector((state)=>state.auth)
+
+  console.log(user);
   return (
     <nav className="navbar navbar-expand-lg bg-black py-3">
     <div className="container-fluid align-items-end">
@@ -27,12 +32,18 @@ const Navbar = () => {
           <NavLink className="nav-link text-white fs-4" to="/create-reservation">
             Create Reservation 
           </NavLink>
-          <NavLink className="nav-link text-white fs-4" to="/my-reservations">
+
+          {user&&<NavLink className="nav-link text-white fs-4" to="/my-reservations">
             My Reservations
-          </NavLink>         
-          <NavLink className="nav-link text-white fs-4 " to="/login">
+          </NavLink> }
+               
+          {!user? <NavLink className="nav-link text-white fs-4 " to="/login">
             Login
-          </NavLink>
+          </NavLink> :<NavLink className="nav-link text-white fs-4 ">
+            Logout
+          </NavLink>}   
+         
+          
         </div>
       </div>
     </div>

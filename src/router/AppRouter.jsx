@@ -6,6 +6,7 @@ import Restaurants from "../pages/Restaurants";
 import Reservation from "../pages/Reservation";
 import Login from "../pages/Login";
 import MyReservations from "../pages/MyReservations";
+import Register from "../pages/Register";
 
 const AppRouter = () => {
   return (
@@ -17,6 +18,7 @@ const AppRouter = () => {
         <Route path="/create-reservation" element={<Reservation />} />
         <Route path="/my-reservations" element={<MyReservations />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );
