@@ -24,7 +24,7 @@ const Restaurants = () => {
     <>
     <div className="p-5 d-flex flex-column gap-5 bg-black text-white border-top border-bottom">
       {restaurants.map((item) => (
-        <div>
+        <div key={item.branchName}>
           <img src="/public/restaurant.jpg" alt="restaurant" width={150} />
           <h4>
             Branch: <span className="fs-5">{item.branchName}</span>

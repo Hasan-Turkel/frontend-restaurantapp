@@ -41,9 +41,17 @@ const Reservation = () => {
           const errors = {};
           if (new Date(values.date)<=new Date()) {
             errors.date = 'Reservation date must be at least one day later.'
-            
             // console.log(new Date(values.date)<=new Date());;
           } 
+          else if (!values.date){
+            errors.date ="Required"
+          }
+          else if (!values.branchId){
+            errors.branchId ="Required"
+          }
+          else if (!values.hour){
+            errors.hour ="Required"
+          }
           return errors;
         }}
         onSubmit={(values, action) => {
@@ -86,7 +94,7 @@ const Reservation = () => {
                 </option>
               ))}
             </Field>
-            <p className="text-danger">{errors.branchId && touched.branchId && errors.branchId}</p>
+            <p className="text-danger">{errors.branchId}</p>
 
             <label htmlFor="date" className="form-label fw-bolder">
               Date* (Please choose by clicking.)
@@ -115,12 +123,12 @@ const Reservation = () => {
              onBlur={handleBlur}
              value={values.hour} 
            />
-           <p className="text-danger">{errors.hour && touched.hour && errors.hour}</p>
+           <p className="text-danger">{errors.hour}</p>
             
             <button
               type="submit"
               className="btn btn-primary"
-              disabled={isSubmitting}
+              disabled={isSubmitting||errors.date || errors.hour || errors.branchId}
             >
 
               Create New Reservation
