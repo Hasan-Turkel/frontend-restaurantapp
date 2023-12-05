@@ -22,7 +22,7 @@ const Restaurants = () => {
   return (
 
     <>
-    <div className="p-5 d-flex flex-column gap-5 bg-warning-subtle">
+    <div className="p-5 d-flex flex-column gap-5 bg-black text-white border-top border-bottom">
       {restaurants.map((item) => (
         <div>
           <img src="/public/restaurant.jpg" alt="restaurant" width={150} />
