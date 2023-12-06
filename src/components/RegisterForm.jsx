@@ -18,7 +18,7 @@ const RegisterForm = () => {
   });
 
   return (
-    <div className="container auth-form">
+    <div className="container auth-form bg-white p-3 rounded-5">
       <Formik
         initialValues={{
           username: "",

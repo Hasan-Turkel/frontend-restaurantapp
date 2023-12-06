@@ -8,9 +8,9 @@ const Login = () => {
   const props = "position-absolute bottom-0";
   const navigate = useNavigate();
   return (
-    <>
+    <main className="d-flex justify-content-center flex-column">
       <LoginForm />
-      <p className="text-center">
+      <h3 className="text-center m-2 text-white">
         Don't you have an account?{" "}
         <span
           className="text-danger"
@@ -19,10 +19,10 @@ const Login = () => {
         >
           Sign Up
         </span>
-      </p>
+      </h3>
       <div className="empty-div"></div>
       <Footer props={props} />
-    </>
+    </main>
   );
 };
 

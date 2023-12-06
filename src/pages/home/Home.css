@@ -6,3 +6,12 @@ main{
    background-color: rgba(0, 0, 0, 0.37);
    height: 80vh;
 }
+.absolute{
+   background-image: url(/public/restaurant.jpg);
+   background-size: cover;
+   background-position:center;
+   background-blend-mode: darken;
+   background-color: rgba(0, 0, 0, 0.37);
+   /* height: 80vh; */
+   background-attachment: fixed
+}

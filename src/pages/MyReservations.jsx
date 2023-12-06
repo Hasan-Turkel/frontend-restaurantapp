@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 import CancelModal from "../components/CancelModal";
 import UpdateModal from "../components/UpdateModal";
+import Footer from "../components/Footer";
 
 const MyBlogs = () => {
 
@@ -27,20 +28,21 @@ const MyBlogs = () => {
   }, []);
 
   return (
-    <div>
+    <div className="absolute">
       {!reservations?.length ? (
-        <div className="d-flex justify-content-center align-items-center profile-div">
-          <h3>
-            No Reservations!{" "}
+        <main className="d-flex justify-content-center align-items-center">
+          <h3 className="bg-black p-3 rounded-5">
+
+            <span className="text-white">No Reservations! </span>
             <span className="text-danger" role="button" onClick={()=>navigate("/create-reservation")}>
               Do you want to add?
             </span>
           </h3>
-        </div>
+        </main>
       ) : (
-        <div className="m-5">
+        <div className="p-3">
         {reservations?.map((item)=>(
-        <div key={item._id} className="my-5 p-3 border rounded-5 shadow-lg" style={{width:"18rem"}}>  
+        <div key={item._id} className="mx-5 mb-3 p-3 border rounded-5 shadow-lg bg-white" style={{width:"18rem"}}>  
           <img src="/restaurant.jpg" alt="restaurant" width={150} />
           <h4>
             Restaurant: <span className="fs-5">{item.branchId.branchName}</span>
@@ -66,6 +68,8 @@ const MyBlogs = () => {
     <CancelModal id ={item._id} getMyReservations={getMyReservations}/>
       </div>
       )}
+
+      <Footer props={!reservations?.length && "position-absolute bottom-0"}/>
     </div>
   );
 };

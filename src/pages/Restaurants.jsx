@@ -22,9 +22,15 @@ const Restaurants = () => {
   return (
 
     <>
-    <div className="p-5 d-flex flex-column gap-5 bg-black text-white border-top border-bottom">
-      {restaurants.map((item) => (
-        <div key={item.branchName}>
+    <div className="d-flex flex-column absolute ">
+      {!restaurants?.length ? (
+        <main className="d-flex justify-content-center align-items-center">
+          <h3 className="bg-black p-3 rounded-5 text-white">
+            Please wait. Our restaurants are loading...
+          </h3>
+        </main>
+      ) :restaurants.map((item) => (
+        <div key={item.branchName} className=" p-3 mx-5 my-4 border rounded-5 shadow-lg bg-white" style={{width:"18rem"}}>
           <img src="/public/restaurant.jpg" alt="restaurant" width={150} />
           <h4>
             Branch: <span className="fs-5">{item.branchName}</span>
@@ -41,7 +47,7 @@ const Restaurants = () => {
         </div>       
       ))}
     </div>
-    <Footer/>
+    <Footer props={!restaurants?.length && "position-absolute bottom-0"}/>
     </>
   );
 };
