@@ -1,9 +1,11 @@
 import useReservationCalls from "../hooks/useReservationCalls";
 
-const DeleteModal = ({ id }) => {
-  const { delBlog } = useReservationCalls();
-  const handleDel = () => {
-    delBlog(id);
+const CancelModal = ({ id, getMyReservations }) => {
+  const { cancelReservation } = useReservationCalls();
+  const handleCancel = () => {
+    cancelReservation(id);
+    getMyReservations()
+    console.log(id);
   };
 
   return (
@@ -32,7 +34,7 @@ const DeleteModal = ({ id }) => {
               />
             </div>
             <div className="modal-body fs-5">
-              You are about to delete the blog! This process can not be undone!
+              You are about to cancel the reservation! This process can not be undone!
               Are you sure about this?
             </div>
             <div className="modal-footer d-flex justify-content-center">
@@ -47,7 +49,7 @@ const DeleteModal = ({ id }) => {
                 type="button"
                 className="btn btn-danger"
                 data-bs-dismiss="modal"
-                onClick={handleDel}
+                onClick={handleCancel}
               >
                 Yes, I'm sure.
               </button>
@@ -59,4 +61,4 @@ const DeleteModal = ({ id }) => {
   );
 };
 
-export default DeleteModal;
+export default CancelModal;

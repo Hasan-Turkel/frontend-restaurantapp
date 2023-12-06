@@ -1,16 +1,16 @@
 
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
-import DeleteModal from "../components/DeleteModal";
-// import UpdateModal from "../components/UpdateModal";
+import CancelModal from "../components/CancelModal";
+import UpdateModal from "../components/UpdateModal";
 
 const MyBlogs = () => {
-  const { user } = useSelector((state) => state.auth);
+
   const navigate = useNavigate()
   const {axiosToken} = useAxios()
-
+ 
+  const [id, setId] = useState("");
   const [reservations, setReservations] = useState([]);
   const getMyReservations = async () => {
     try {
@@ -55,16 +55,15 @@ const MyBlogs = () => {
             Situation: <span className={new Date(item.date)<new Date() || item.situation =="canceled"?"fs-5 text-danger":"fs-5"}>{new Date(item.date)<new Date()? "OUT of DATE":item.situation.toUpperCase()}</span>
           </h4>
 
-           {item.situation=="reserved"&&<div>
-            {/* <button className="btn btn-primary m-4" data-bs-toggle="modal"
-      data-bs-target="#update">Update</button> */}
+           {item.situation=="reserved"&&new Date(item.date)>new Date()&&<div>
+            <button className="btn btn-primary m-4" data-bs-toggle="modal"
+      data-bs-target="#update" onClick={()=>setId(item._id)}>Update</button>
 
     <button className="btn btn-danger m-4"  data-bs-toggle="modal"
-      data-bs-target="#del" >Cancel</button></div>}
-
-    <DeleteModal id={item._id}/>
-    {/* <UpdateModal id={item._id} data={reservations} getDetailCard={getMyReservations}/> */}
+      data-bs-target="#del" onClick={()=>setId(item._id)}>Cancel</button></div>}
         </div>   ))}
+    <UpdateModal id ={id} data={reservations} getMyReservations={getMyReservations}/>
+    <CancelModal id ={id} getMyReservations={getMyReservations}/>
       </div>
       )}
     </div>

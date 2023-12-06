@@ -26,6 +26,24 @@ const useReservationCalls = () => {
     }
   };
 
+  const cancelReservation = async (id) => {
+   
+    try {
+        const { data } = await axiosToken.put(`/reservations/${id}/`,{situation:"canceled"},
+        );
+    //   toastSuccessNotify("The blog has been updated.")
+     
+      // console.log(data);
+      // console.log(id);
+      
+    } catch (error) {
+    //   console.log(error.message);
+      // console.log(id);
+    
+    //   toastErrorNotify("Update failed.")
+    }
+  };
+
 
   const sendReservation = async (values) => {
 
@@ -42,7 +60,7 @@ const useReservationCalls = () => {
   };
 
 
-  return { updateReservation, sendReservation };
+  return { updateReservation, sendReservation, cancelReservation };
 };
 
 export default useReservationCalls;
