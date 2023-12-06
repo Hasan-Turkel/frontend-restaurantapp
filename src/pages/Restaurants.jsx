@@ -11,7 +11,7 @@ const Restaurants = () => {
       const { data } = await axiosSimple.get(`restaurants`);
       setRestaurants(data.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

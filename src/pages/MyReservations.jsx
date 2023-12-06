@@ -10,7 +10,7 @@ const MyBlogs = () => {
   const navigate = useNavigate()
   const {axiosToken} = useAxios()
  
-  const [id, setId] = useState("");
+  const [item, setItem] = useState("");
   const [reservations, setReservations] = useState([]);
   const getMyReservations = async () => {
     try {
@@ -57,13 +57,13 @@ const MyBlogs = () => {
 
            {item.situation=="reserved"&&new Date(item.date)>new Date()&&<div>
             <button className="btn btn-primary m-4" data-bs-toggle="modal"
-      data-bs-target="#update" onClick={()=>setId(item._id)}>Update</button>
+      data-bs-target="#update" onClick={()=>setItem(item)}>Update</button>
 
     <button className="btn btn-danger m-4"  data-bs-toggle="modal"
-      data-bs-target="#del" onClick={()=>setId(item._id)}>Cancel</button></div>}
+      data-bs-target="#del" onClick={()=>setItem(item)}>Cancel</button></div>}
         </div>   ))}
-    <UpdateModal id ={id} data={reservations} getMyReservations={getMyReservations}/>
-    <CancelModal id ={id} getMyReservations={getMyReservations}/>
+    <UpdateModal id={item._id} getMyReservations={getMyReservations}/>
+    <CancelModal id ={item._id} getMyReservations={getMyReservations}/>
       </div>
       )}
     </div>

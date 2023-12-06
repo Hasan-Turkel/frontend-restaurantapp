@@ -1,27 +1,26 @@
+import  useAxios from "../hooks/useAxios";
 import useReservationCalls from "../hooks/useReservationCalls";
 import { Formik, Form, Field } from "formik";
-import axios from "axios";
 import { useEffect, useState } from "react";
 
-const UpdateModal = ({ data, id, getDetailCard }) => {
-  const { updateBlog } = useReservationCalls();
+const UpdateModal = ({ id, getMyReservations}) => {
+  const { updateReservation } = useReservationCalls();
+  const { axiosSimple } = useAxios();
+  const [restaurants, setRestaurants] = useState([]);
 
   
-  const [cat, setCat] = useState([]);
-  // console.log(cat);
-
-  const getCat = async () => {
+  const getRestaurants = async () => {
     try {
-      const { data } = await axios(`${import.meta.env.VITE_BASE_URL}/api/categories/`);
-      setCat(data);
-      // console.log(data);
+      const { data } = await axiosSimple.get(`restaurants`);
+      setRestaurants(data.data);
+    //   console.log(data);
     } catch (error) {
       // console.log(error);
     }
   };
 
   useEffect(() => {
-    getCat();
+    getRestaurants();
   }, []);
 
   return (
@@ -40,7 +39,7 @@ const UpdateModal = ({ data, id, getDetailCard }) => {
                 className="modal-title fs-3 text-primary"
                 id="exampleModalLabel"
               >
-                UPDATE BLOG
+                UPDATE RESERVATION
               </h1>
               <button
                 type="button"
@@ -52,13 +51,33 @@ const UpdateModal = ({ data, id, getDetailCard }) => {
 
             <div className="container mb-4 auth-form">
               <Formik
-                enableReinitialize={true}
-                initialValues={data}
+                initialValues={{
+                    branchId: "",
+                    date: "",
+                    hour:""
+                  }}
+                  validate={values => {
+                    const errors = {};
+                    if (new Date(values.date)<=new Date()) {
+                      errors.date = 'Reservation date must be at least one day later.'
+                      // console.log(new Date(values.date)<=new Date());;
+                    } 
+                    else if (!values.date){
+                      errors.date ="Required"
+                    }
+                    else if (!values.branchId){
+                      errors.branchId ="Required"
+                    }
+                    else if (!values.hour){
+                      errors.hour ="Required"
+                    }
+                    return errors;
+                  }}
                 onSubmit={(values, action) => {
                   // console.log(values);
-                  updateBlog(values);
+                  updateReservation({...values, id:id});
                   setTimeout(() => {
-                    getDetailCard();
+                    getMyReservations();
                   }, 1000);
                   action.resetForm();
                   action.setSubmitting(false);
@@ -75,90 +94,59 @@ const UpdateModal = ({ data, id, getDetailCard }) => {
                   isSubmitting,
                   /* and other goodies */
                 }) => (
-                  <Form onSubmit={handleSubmit}>
-                    <label
-                      htmlFor="title"
-                      className="form-label mt-2 fw-bolder"
-                    >
-                      Title*
-                    </label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="title"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.title}
-                    />
-                    <h3>{errors.title && touched.title && errors.title}</h3>
-                    <label htmlFor="image" className="form-label fw-bolder">
-                      Image Url*
-                    </label>
-                    <input
-                      className="form-control"
-                      type="url"
-                      name="image"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.image}
-                    />
-                    <h3>{errors.image && touched.image && errors.image}</h3>
-                    <label htmlFor="content" className="form-label fw-bolder">
-                      Content*
-                    </label>{" "}
-                    <br />
-                    <Field
-                      as="textarea"
-                      className="form-control textarea"
-                      type="text"
-                      name="content"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.content}
-                    />
-                    <h3>
-                      {errors.content && touched.content && errors.content}
-                    </h3>
-                    <label htmlFor="category" className="form-label fw-bolder">
-                      Categories* (Please choose by clicking.)
+                    <Form onSubmit={handleSubmit}>
+           
+                    <label htmlFor="branchId" className="form-label fw-bolder">
+                      Restaurant* (Please choose by clicking.)
                     </label>
                     <br />
                     <Field
                       as="select"
                       className="form-control "
-                      name="category"
+                      name="branchId"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      value={values.category}
+                      value={values?.branchId?.branchName}
                       role="button"
+                      required
                     >
                       <option value="">Please choose</option>
-                      {cat?.map((item) => (
-                        <option key={item.id} value={item.id}>
-                          {item.name}
+                      {restaurants?.map((item) => (
+                        <option key={item.id} value={item._id} >
+                          {item.branchName}
                         </option>
                       ))}
                     </Field>
-                    <h3>
-                      {errors.category && touched.category && errors.category}
-                    </h3>
-                    <label htmlFor="status" className="form-label fw-bolder">
-                      Status* (Please choose by clicking.)
+                    <p className="text-danger">{errors.branchId}</p>
+        
+                    <label htmlFor="date" className="form-label fw-bolder">
+                      Date* (Please choose by clicking.)
                     </label>
                     <br />
-                    <Field
-                      as="select"
-                      className="form-control "
-                      name="status"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.status}
-                    >
-                      <option value="">Please choose</option>
-                      <option value="d">Draft</option>
-                      <option value="p">Publish</option>
-                    </Field>
-                    <h3>{errors.status && touched.status && errors.status}</h3>
+                    <input
+                    className="form-control"
+                     type="date"
+                     name="date"
+                     onChange={handleChange}
+                     onBlur={handleBlur}
+                     value={values?.date}
+                   />
+                   <p className="text-danger">{errors.date}</p>
+                   
+        
+                    <label htmlFor="hour" className="form-label fw-bolder">
+                      Time* (Please choose by clicking.)
+                    </label>
+                    <br />
+                    <input
+                    className="form-control"
+                     type="time"
+                     name="hour"
+                     onChange={handleChange}
+                     onBlur={handleBlur}
+                     value={values.hour} 
+                   />
+                   <p className="text-danger">{errors.hour}</p>
                     <button
                       type="submit"
                       disabled={isSubmitting}
