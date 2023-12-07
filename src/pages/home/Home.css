@@ -1,5 +1,5 @@
 main{
-   background-image: url(/public/restaurant.jpg);
+   background-image: url(/restaurant.jpg);
    background-size: cover;
    background-position: center;
    background-blend-mode: darken;
@@ -7,7 +7,7 @@ main{
    height: 80vh;
 }
 .absolute{
-   background-image: url(/public/restaurant.jpg);
+   background-image: url(/restaurant.jpg);
    background-size: cover;
    background-position:center;
    background-blend-mode: darken;

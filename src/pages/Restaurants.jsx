@@ -31,7 +31,7 @@ const Restaurants = () => {
         </main>
       ) :restaurants.map((item) => (
         <div key={item.branchName} className=" p-3 mx-5 my-4 border rounded-5 shadow-lg bg-white" style={{width:"18rem"}}>
-          <img src="/public/restaurant.jpg" alt="restaurant" width={150} />
+          <img src="/restaurant.jpg" alt="restaurant" width={150} />
           <h4>
             Branch: <span className="fs-5">{item.branchName}</span>
           </h4>
