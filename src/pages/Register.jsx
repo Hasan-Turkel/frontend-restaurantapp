@@ -2,17 +2,35 @@
 import Footer from '../components/Footer';
 import RegisterForm from '../components/RegisterForm'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from "react-redux";
 
 const Register = () => {
   const props = "position-absolute bottom-0";
-
+  const { loading } = useSelector((state) => state.auth)
   const navigate = useNavigate()
-  return (<main className='d-flex justify-content-center flex-column'>
-   <RegisterForm/>
-   <h3 className='text-center mt- text-white'>Do you already have an account? <span className='text-danger' role='button' onClick={()=>navigate("/login")}>Sign In</span></h3>
-
-   <Footer props={props} />
-  
+  return (
+    <main className="d-flex justify-content-center flex-column align-items-center">
+    {loading ? (<>
+      <h1 className="text-center p-3 m-2 text-white border bg-black rounded-5">
+       Register performing...
+      </h1>
+      <Footer props={props} />
+      </>
+    ) : (<>
+        <RegisterForm />
+        <h3 className="text-center mb-2 text-white">
+          Don't you have an account?{" "}
+          <span
+            className="text-danger"
+            role="button"
+            onClick={() => navigate("/register")}
+          >
+            Sign Up
+          </span>
+        </h3>
+        <Footer props={props} />
+        </>
+        )}
   </main>
    
   )
