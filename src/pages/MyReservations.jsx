@@ -30,7 +30,7 @@ const MyBlogs = () => {
   return (
     <div className="absolute">
       {!reservations?.length ? (
-        <main className="d-flex justify-content-center align-items-center">
+        <main className="d-flex justify-content-center align-items-center" >
           <h3 className="bg-black p-3 rounded-5">
 
             <span className="text-white">No Reservations! </span>
@@ -40,7 +40,7 @@ const MyBlogs = () => {
           </h3>
         </main>
       ) : (
-        <div className="p-3">
+        <div className="p-3" style={{minHeight:"52rem"}}>
         {reservations?.map((item)=>(
         <div key={item._id} className="mx-5 mb-3 p-3 border rounded-5 shadow-lg bg-white" style={{width:"18rem"}}>  
           <img src="/restaurant.jpg" alt="restaurant" width={150} />
@@ -68,7 +68,6 @@ const MyBlogs = () => {
     <CancelModal id ={item._id} getMyReservations={getMyReservations}/>
       </div>
       )}
-
       <Footer props={!reservations?.length && "position-absolute bottom-0"}/>
     </div>
   );

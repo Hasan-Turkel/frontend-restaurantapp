@@ -1,10 +1,13 @@
-
-import AppRouter from './router/AppRouter'
+import AppRouter from "./router/AppRouter";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
-    <> <AppRouter />
-  </>)
-}
+    <>
+      <AppRouter />
+      <ToastContainer />
+    </>
+  );
+};
 
-export default App
+export default App;
