@@ -4,7 +4,9 @@ const CancelModal = ({ id, getMyReservations }) => {
   const { cancelReservation } = useReservationCalls();
   const handleCancel = () => {
     cancelReservation(id);
-    getMyReservations()
+    setTimeout(() => {
+      getMyReservations();
+    }, 1000);
     console.log(id);
   };
 
