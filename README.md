@@ -5,5 +5,20 @@ Restaurant-app is a project that you can see restaurants and you can create rese
 
 ## This is how the site looks like.
 
+<img
+        src="./home.jpg"
+        alt="home"
+        width ="600px"
+      />
+<img
+        src="./create.jpg"
+        alt="my"
+        width ="600px"
+      />
+<img
+        src="./create.jpg"
+        alt="my"
+        width ="600px"
+      />
 
-![./restaurantapp.gif](./restaurantapp.gif)
+
