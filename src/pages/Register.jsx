@@ -19,13 +19,13 @@ const Register = () => {
     ) : (<>
         <RegisterForm />
         <h3 className="text-center mb-2 text-white">
-          Don't you have an account?{" "}
+          Have an account?{" "}
           <span
             className="text-danger"
             role="button"
             onClick={() => navigate("/register")}
           >
-            Sign Up
+            Login
           </span>
         </h3>
         <Footer props={props} />

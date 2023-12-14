@@ -26,7 +26,7 @@ const Login = () => {
               role="button"
               onClick={() => navigate("/register")}
             >
-              Sign Up
+              Register
             </span>
           </h3>
           <div className="empty-div"></div>
